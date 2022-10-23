@@ -1,10 +1,16 @@
 import logging
 import threading
 import time
+from enum import Enum
 
 from screen_activator import ScreenActivator
 
 LOGGER = logging.getLogger(__name__)
+
+
+class TimerStatus(Enum):
+    STARTED = 1
+    STOPPED = 2
 
 
 class MotionDetectionTimer:
@@ -20,18 +26,34 @@ class MotionDetectionTimer:
         self.interval = no_motion_interval
         self.timer = threading.Timer(self.interval, self.__finished_timer)
         self.lock = threading.Lock()
+        self.current_status = TimerStatus.STOPPED
+
+    def create_new_timer(self):
+        self.timer = threading.Timer(self.interval, self.__finished_timer)
 
     def start(self):
-        self.lock.acquire()
-        self.timer.start()
-        self.lock.release()
+        with self.lock:
+            if self.current_status == TimerStatus.STARTED:
+                return
+
+            LOGGER.info('Start shutdown timer')
+
+            self.timer.start()
+            self.current_status = TimerStatus.STARTED
 
     def stop(self):
-        self.lock.acquire()
-        self.timer.cancel()
-        self.lock.release()
+        with self.lock:
+            if self.current_status == TimerStatus.STOPPED:
+                return
+
+            LOGGER.info('Stop shutdown timer')
+            self.timer.cancel()
+            self.create_new_timer()
+            self.current_status = TimerStatus.STOPPED
 
     def restart(self):
+        LOGGER.info('Restart shutdown timer')
+
         self.stop()
         time.sleep(5)
         self.start()
@@ -39,4 +61,4 @@ class MotionDetectionTimer:
     def __finished_timer(self):
         LOGGER.info('motion detection timed out')
         self.screenActivator.deactivate()
-        pass
+        self.stop()
