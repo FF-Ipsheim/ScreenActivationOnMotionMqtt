@@ -9,10 +9,10 @@ LOGGER = logging.getLogger(__name__)
 
 class PirWatcher:
 
-    PIR_PIN = 8  # GPIO PIN: 14
+    GPIO_PIN = 23  # see https://www.elektronik-kompendium.de/sites/raspberry-pi/1907101.htm
 
     def __init__(self, _motion_detect_timer: MotionDetectionTimer, _screen_activator: ScreenActivator):
-        self.sensor = MotionSensor(self.PIR_PIN)
+        self.sensor = MotionSensor(self.GPIO_PIN)
 
         self.screen_activator = _screen_activator
         self.motion_detect_timer = _motion_detect_timer

@@ -10,7 +10,7 @@ from motion_detect_timer import MotionDetectionTimer
 from pir_watcher import PirWatcher
 from screen_activator import ScreenActivator
 
-LOG_FORMAT = '%(asctime)s %(levelname)s %(module)s %(lineno)d: %(message)s'
+LOG_FORMAT = '%(asctime)s %(levelname)s %(module)s: %(message)s'
 LOGGER = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description='Activates the screen on monition an puts it in standby after a given '

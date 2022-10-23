@@ -16,16 +16,21 @@ class ScreenActivator:
         else:
             raise Exception("Date provided can't be in the past")
 
+        self.powered_on = None
         self.activate()
 
     def activate(self):
 
         LOGGER.info('activate screen')
 
-        self.processor.power_on_screen()
+        if not self.powered_on:
+            self.processor.power_on_screen()
+            self.powered_on = True
 
     def deactivate(self):
 
         LOGGER.info('deactivate screen')
 
-        self.processor.standby_screen()
+        if self.powered_on:
+            self.processor.standby_screen()
+            self.powered_on = False

@@ -6,9 +6,9 @@ Zur Realisierung der Aktivierungsfunktion wird ein Bewegungsmelder eingesetzt. B
 Als Sensor wird ein HC-SR501 eingesetzt. Es ist jedoch auch jeder x-beliebige PIR Sensor möglich.
 
 ## Requirements
-Install `cec-utils`:
+Install `cec-utils` and `python3-rpi.gpio`:
 ``` console
-sudo apt install cec-utils
+sudo apt install cec-utils python3-rpi.gpio
 ```
 
 ## Bewegungsmelder PIR
@@ -18,7 +18,7 @@ sudo apt install cec-utils
 <img src="assets/pir.png" alt="Verdrahtung" width="400px">
 
 - VCC an Pin 2 (5V)
-- OUT an Pin 8 (GPIO 14)
+- OUT an Pin 16 (GPIO 23)
 - GND an Pin 6 (Ground)
 
 ***Jumper SW1 bzw. MD:*** Triggerverhalten von Out (Data):
