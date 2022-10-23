@@ -3,6 +3,7 @@
 import argparse
 import logging
 from logging.handlers import SysLogHandler
+import pathlib
 import sys
 from signal import pause
 
@@ -26,7 +27,8 @@ parser.add_argument('-i', '--no_motion_interval', dest='no_motion_interval', act
 
 def main():
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT,
-                        handlers=[logging.FileHandler('ScreenActivationOnMotion.log', mode='w'),
+                        handlers=[logging.FileHandler(pathlib.Path(__file__).parent.absolute()
+                                                      .joinpath('ScreenActivationOnMotion.log'), mode='w'),
                                   logging.StreamHandler(sys.stdout),
                                   logging.handlers.SysLogHandler()])
     args = parser.parse_args()
