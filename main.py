@@ -6,10 +6,14 @@ from logging.handlers import SysLogHandler
 import pathlib
 import sys
 from signal import pause
+from tendo.singleton import SingleInstance
 
 from motion_detect_timer import MotionDetectionTimer
 from pir_watcher import PirWatcher
 from screen_activator import ScreenActivator
+
+
+me = SingleInstance()
 
 LOG_FORMAT = '%(asctime)s %(levelname)s %(module)s: %(message)s'
 LOGGER = logging.getLogger(__name__)
