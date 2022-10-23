@@ -45,7 +45,7 @@ def main():
         pir_watcher.stop()
         timer.stop()
 
-    LOGGER.info('Terminate')
+    LOGGER.debug('Terminate')
 
 
 if __name__ == '__main__':

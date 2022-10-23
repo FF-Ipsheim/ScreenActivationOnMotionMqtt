@@ -36,7 +36,7 @@ class MotionDetectionTimer:
             if self.current_status == TimerStatus.STARTED:
                 return
 
-            LOGGER.info('Start shutdown timer')
+            LOGGER.debug('Start shutdown timer')
 
             self.timer.start()
             self.current_status = TimerStatus.STARTED
@@ -46,19 +46,19 @@ class MotionDetectionTimer:
             if self.current_status == TimerStatus.STOPPED:
                 return
 
-            LOGGER.info('Stop shutdown timer')
+            LOGGER.debug('Stop shutdown timer')
             self.timer.cancel()
             self.create_new_timer()
             self.current_status = TimerStatus.STOPPED
 
     def restart(self):
-        LOGGER.info('Restart shutdown timer')
+        LOGGER.debug('Restart shutdown timer')
 
         self.stop()
         time.sleep(5)
         self.start()
 
     def __finished_timer(self):
-        LOGGER.info('motion detection timed out')
+        LOGGER.info('=> Motion detection timed out')
         self.screenActivator.deactivate()
         self.stop()
