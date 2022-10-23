@@ -38,5 +38,5 @@ With raspberry pi's LXDE change following file:
 with
 ```
 # Motion detection to activate monitor
-@python /home/pi/alarmMonitor/kiosk/MonitorActivation/main.py
+@python /home/pi/ScreenActivationOnMotion/main.py
 ```

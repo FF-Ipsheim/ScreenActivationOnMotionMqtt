@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MonitorActivation.iml" filepath="$PROJECT_DIR$/.idea/MonitorActivation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ScreenActivationOnMotion.iml" filepath="$PROJECT_DIR$/.idea/ScreenActivationOnMotion.iml" />
     </modules>
   </component>
 </project>
