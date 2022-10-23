@@ -1,4 +1,5 @@
 import logging
+import keyboard
 
 LOGGER = logging.getLogger(__name__)
 
@@ -16,7 +17,17 @@ class ScreenActivator:
         else:
             raise Exception("Date provided can't be in the past")
 
+        keyboard.add_hotkey("ctrl+alt+o", self.__on_wakeup_by_keyboard)
+
         self.powered_on = None
+        self.activate()
+
+    def __del__(self):
+        keyboard.unhook_all()
+
+    def __on_wakeup_by_keyboard(self):
+        LOGGER.info('Activate monitor by keyboard hotkey')
+        self.powered_on = False  # force activate
         self.activate()
 
     def activate(self):

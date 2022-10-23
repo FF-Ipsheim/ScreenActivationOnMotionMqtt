@@ -6,10 +6,16 @@ Zur Realisierung der Aktivierungsfunktion wird ein Bewegungsmelder eingesetzt. B
 Als Sensor wird ein HC-SR501 eingesetzt. Es ist jedoch auch jeder x-beliebige PIR Sensor möglich.
 
 ## Requirements
-Install `cec-utils` and `python3-rpi.gpio`:
+Installiere `cec-utils` und `python3-rpi.gpio`:
 ``` console
 sudo apt install cec-utils python3-rpi.gpio
 ```
+
+Zusätzlich müssen die abhängigen Python Module installiert werden:
+``` console
+pip install -r requirements.txt
+```
+
 
 ## Bewegungsmelder PIR
 

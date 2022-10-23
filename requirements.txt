@@ -1,4 +1,5 @@
-logger
 argparse
 gpiozero
+keyboard
+logger
 tendo

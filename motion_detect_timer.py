@@ -28,6 +28,8 @@ class MotionDetectionTimer:
         self.lock = threading.Lock()
         self.current_status = TimerStatus.STOPPED
 
+        LOGGER.info(f'No motion time to shutdown: {no_motion_interval} seconds')
+
     def create_new_timer(self):
         self.timer = threading.Timer(self.interval, self.__finished_timer)
 
