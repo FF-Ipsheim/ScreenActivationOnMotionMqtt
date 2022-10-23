@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 
-import sys, argparse, logging
+import argparse
+import logging
+from logging.handlers import SysLogHandler
+import sys
 from signal import pause
 
 from motion_detect_timer import MotionDetectionTimer
 from pir_watcher import PirWatcher
 from screen_activator import ScreenActivator
 
-LOG_FORMAT = '%(levelname) -10s %(asctime)s %(name) -15s %(funcName) -5s %(lineno) -3d: %(message)s'
+LOG_FORMAT = '%(asctime)s %(levelname)s %(module)s %(lineno)d: %(message)s'
 LOGGER = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description='Activates the screen on monition an puts it in standby after a given '
@@ -22,8 +25,13 @@ parser.add_argument('-i', '--no_motion_interval', dest='no_motion_interval', act
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT,
+                        handlers=[logging.FileHandler('ScreenActivationOnMotion.log', mode='w'),
+                                  logging.StreamHandler(sys.stdout),
+                                  logging.handlers.SysLogHandler()])
     args = parser.parse_args()
+
+    LOGGER.info('Start screen activation on motion ...')
 
     screen_activator = ScreenActivator(args.processor_type)
     timer = MotionDetectionTimer(screen_activator, args.no_motion_interval)
@@ -36,6 +44,8 @@ def main():
     except KeyboardInterrupt:
         pir_watcher.stop()
         timer.stop()
+
+    LOGGER.info('Terminate')
 
 
 if __name__ == '__main__':
