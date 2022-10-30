@@ -7,15 +7,21 @@ Als Sensor wird ein HC-SR501 eingesetzt. Es ist jedoch auch jeder x-beliebige PI
 
 ## Requirements
 Installiere `cec-utils` und `python3-rpi.gpio`:
-``` console
+```commandline
 sudo apt install cec-utils python3-rpi.gpio
 ```
 
+Damit die Hotkeys funktionieren muss der Benutzer, der das Skript ausführt, zu der Gruppe `tty` gehören:
+```commandline
+sudo usermod -a -G tty,input $USER
+```
+Dies muss zwingend vor [Notwendige Python Module](#notwendige-python-module) ausgeführt werden.
+
+### Notwendige Python Module
 Zusätzlich müssen die abhängigen Python Module installiert werden:
-``` console
+```commandline
 pip install -r requirements.txt
 ```
-
 
 ## Bewegungsmelder PIR
 
@@ -36,7 +42,7 @@ pip install -r requirements.txt
 - ***Stellschraube Tx (Time):*** Bestimmt die Dauer, wie lange Data auf High beibt bei Erkennung einer Bewegung
 
 ## Programm in den Autostart legen
-```
+```commandline
 python3 main.py
 ```
 With raspberry pi's LXDE change following file:

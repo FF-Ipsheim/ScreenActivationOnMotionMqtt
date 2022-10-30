@@ -1,5 +1,5 @@
 argparse
 gpiozero
-keyboard
+-e git+https://github.com/boppreh/keyboard.git#egg=keyboard
 logger
 tendo

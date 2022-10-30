@@ -18,6 +18,9 @@ class ScreenActivator:
             raise Exception("Date provided can't be in the past")
 
         keyboard.add_hotkey("ctrl+alt+o", self.__on_wakeup_by_keyboard)
+        LOGGER.info('=======================================')
+        LOGGER.info('=== Use Ctrl+Alt+o to force wake up ===')
+        LOGGER.info('=======================================')
 
         self.powered_on = None
         self.activate()
