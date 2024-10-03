@@ -1,5 +1,6 @@
 argparse
-gpiozero
 -e git+https://github.com/boppreh/keyboard.git#egg=keyboard
 logger
-tendo
+paho_mqtt==2.1.0
+py_dotenv_safe==1.0.1
+tendo==0.3.0

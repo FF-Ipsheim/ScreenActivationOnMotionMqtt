@@ -1,14 +1,17 @@
 # Monitor Aktivierung
 Aktiviert den Monitor, wenn dieser sich im Standby Modus befinden sollte.
 
-Zur Realisierung der Aktivierungsfunktion wird ein Bewegungsmelder eingesetzt. Bei Erkennung einer Bewegung triggert das Programm die Aktivierung des Monitors.
+Zur Realisierung der Aktivierungsfunktion wird ein Bewegungsmelder (Aquara) mittels [Zigbee2Mqtt](https://www.zigbee2mqtt.io/) eingesetzt. 
+Bei Erkennung einer Bewegung sendet der Motion Sensor ein Zigbee Signal an Zigbee2Mqtt, welches wiederum einen Eintrag im entsprechenden Topic schreibt.
+Dieses Topic wird von diesem Programm überwacht und die Aktivierung des Monitors gestartet.
 
-Als Sensor wird ein HC-SR501 eingesetzt. Es ist jedoch auch jeder x-beliebige PIR Sensor möglich.
+Als Motion Sensor wird ein Aquara [FP1E](https://www.aqara.com/de/product/presence-sensor-fp1e-specs/) eingesetzt. 
+Es ist jedoch auch jeder x-beliebige PIR Sensor möglich. Es muss schlussendlich nur eine MQTT Message geschrieben werden.
 
 ## Requirements
-Installiere `cec-utils` und `python3-rpi.gpio`:
+Installiere `cec-utils`:
 ```commandline
-sudo apt install cec-utils python3-rpi.gpio
+sudo apt install cec-utils
 ```
 
 Damit die Hotkeys funktionieren muss der Benutzer, der das Skript ausführt, zu der Gruppe `tty` gehören:
@@ -23,23 +26,6 @@ Zusätzlich müssen die abhängigen Python Module installiert werden:
 pip install -r requirements.txt
 ```
 
-## Bewegungsmelder PIR
-
-### PIR anschließen
-
-<img src="assets/pir.png" alt="Verdrahtung" width="400px">
-
-- VCC an Pin 2 (5V)
-- OUT an Pin 16 (GPIO 23)
-- GND an Pin 6 (Ground)
-
-***Jumper SW1 bzw. MD:*** Triggerverhalten von Out (Data):
-- ***Position H:*** Data wird aller einer Sekunde auf High gesetzt bei Bewegungserkennung
-- ***Position L:*** Data beibt auf High, solange eine Bewegung erkannt wird (Empfehlung)
-
-### PIR Einstellungen
-- ***Stellschraube Sx (Sensitive):*** Sensitivität der Bewegungserkennung
-- ***Stellschraube Tx (Time):*** Bestimmt die Dauer, wie lange Data auf High beibt bei Erkennung einer Bewegung
 
 ## Programm in den Autostart legen
 ```commandline
