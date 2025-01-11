@@ -26,6 +26,13 @@ Zusätzlich müssen die abhängigen Python Module installiert werden:
 pip install -r requirements.txt
 ```
 
+## Programmkonfiguration
+Das Programm muss noch konfiguriert werden, um z.B. den richtigen MQTT Server anzusprechen. Hierfür muss eine Kopie der `.env.example` erzeugt werden. Dieser Kopie ist der Name `.env` zu geben:
+```commandline
+cp .env.example .env
+```
+Anschließend ist die `.env` Datei anzupassen.
+
 
 ## Programm in den Autostart legen
 ```commandline
